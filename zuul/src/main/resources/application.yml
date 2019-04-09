@@ -1,0 +1,32 @@
+server: 
+  port: 9527
+ 
+spring: 
+  application:
+    name: springcloud-zuul
+ 
+eureka: 
+  client: 
+    service-url: 
+      defaultZone: http://eureka1.com:7001/eureka,http://eureka2.com:7002/eureka,http://eureka3.com:7003/eureka
+  instance:
+    instance-id: springcloud-zuul-instance
+    prefer-ip-address: true 
+ 
+ 
+zuul:
+  # 访问路径的前缀
+  prefix: /cloud
+  # 忽略所有的服务名，使其不能以服务名访问
+  ignored-services: "*"
+  routes:
+    # 节点映射
+    mydept.serviceId: springcloud-feign
+    mydept.path: /feign/**
+ 
+info:
+  app.name: springcloud
+  company.name: com.jiang.springcloud
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
